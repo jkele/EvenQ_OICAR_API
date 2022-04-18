@@ -13,7 +13,6 @@ namespace EvenQ_API.Model
 
         public int IDTicket { get; set; }
         public string TicketQR { get; set; }
-
         public Member Member { get; set; }
         public string MemberId { get; set; }
         public Event Event { get; set; }

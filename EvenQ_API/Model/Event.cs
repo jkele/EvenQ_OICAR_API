@@ -17,6 +17,7 @@ namespace EvenQ_API.Model
         public string Title { get; set; }
         public string Description { get; set; }
         public byte[] PosterImage { get; set; }
+
         public DateTime Date { get; set; }
 
         public Location Location { get; set; }
