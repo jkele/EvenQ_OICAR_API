@@ -16,7 +16,6 @@ namespace EvenQ_API.Model
         public string RefferalCode { get; set; }
         public bool IsAdmin { get; set; }
         public int NumberOfRefferals { get; set; }
-        public string MembershipQRCodeInfo { get; set; }
         public bool MembershipValid { get; set; }
     }
 }
