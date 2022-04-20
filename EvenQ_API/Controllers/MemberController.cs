@@ -97,8 +97,8 @@ namespace EvenQ_API.Controllers
             }
         }
 
-        [HttpPut("{UID:int}")]
-        public async Task<ActionResult<Member>> UpdateEmployee(string UID, Member member)
+        [HttpPut("{UID}")]
+        public async Task<ActionResult<Member>> UpdateMember(string UID, Member member)
         {
             try
             {
@@ -121,8 +121,8 @@ namespace EvenQ_API.Controllers
             }
         }
 
-        [HttpDelete("{UID:int}")]
-        public async Task<ActionResult> DeleteEmployee(string UID)
+        [HttpDelete("{UID}")]
+        public async Task<ActionResult> DeleteMember(string UID)
         {
             try
             {
