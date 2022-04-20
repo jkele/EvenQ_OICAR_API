@@ -71,7 +71,6 @@ namespace EvenQ_API.Repo
                 {
                     results.NumberOfRefferals = member.NumberOfRefferals;
                 }
-                results.MembershipQRCodeInfo = member.MembershipQRCodeInfo;
                 results.MembershipValid = member.MembershipValid;
 
                 await appDbContext.SaveChangesAsync();

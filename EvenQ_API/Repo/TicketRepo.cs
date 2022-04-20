@@ -73,6 +73,7 @@ namespace EvenQ_API.Repo
                     results.EventId = ticket.Event.IDEvent;
                 }
                 results.EventId = ticket.EventId;
+                results.IsValid = ticket.IsValid;
 
                 await appDbContext.SaveChangesAsync();
 

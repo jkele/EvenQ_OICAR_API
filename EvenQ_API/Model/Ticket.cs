@@ -17,5 +17,6 @@ namespace EvenQ_API.Model
         public string MemberId { get; set; }
         public Event Event { get; set; }
         public int EventId { get; set; }
+        public bool IsValid { get; set; }
     }
 }
