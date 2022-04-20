@@ -87,7 +87,7 @@ namespace EvenQ_API.Controllers
 
                 var createdMember = await memberRepo.AddMember(member);
 
-                return CreatedAtAction(nameof(GetMember),
+                return CreatedAtAction(nameof(CreateMember),
                     new { id = createdMember.UID }, createdMember);
             }
             catch (Exception ex)

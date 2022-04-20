@@ -87,7 +87,7 @@ namespace EvenQ_API.Controllers
 
                 var createdLocation = await locationRepo.AddLocation(Location);
 
-                return CreatedAtAction(nameof(GetLocation),
+                return CreatedAtAction(nameof(CreateLocation),
                     new { id = createdLocation.IDLocation }, createdLocation);
             }
             catch (Exception ex)

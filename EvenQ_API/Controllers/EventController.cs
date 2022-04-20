@@ -86,7 +86,7 @@ namespace EvenQ_API.Controllers
 
                 var createdEvent = await evenRepo.AddEvent(Event);
 
-                return CreatedAtAction(nameof(GetEvent),
+                return CreatedAtAction(nameof(CreateEvent),
                     new { id = createdEvent.IDEvent }, createdEvent);
             }
             catch (Exception ex)

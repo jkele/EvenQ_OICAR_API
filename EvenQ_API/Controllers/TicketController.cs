@@ -67,7 +67,7 @@ namespace EvenQ_API.Controllers
 
                 var createdTicked = await ticketRepo.AddTicket(Ticket);
 
-                return CreatedAtAction(nameof(GetTicket),
+                return CreatedAtAction(nameof(CreateTicket),
                     new { id = createdTicked.IDTicket }, createdTicked);
             }
             catch (Exception ex)

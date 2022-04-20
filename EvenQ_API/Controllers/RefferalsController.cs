@@ -108,7 +108,7 @@ namespace EvenQ_API.Controllers
 
                 var createdRefferal = await refferalsRepo.AddRefferal(Refferals);
 
-                return CreatedAtAction(nameof(GetRefferal),
+                return CreatedAtAction(nameof(CreateRefferal),
                     new { id = createdRefferal.IDRefferal }, createdRefferal);
             }
             catch (Exception ex)
