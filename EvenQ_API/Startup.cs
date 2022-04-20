@@ -1,4 +1,5 @@
 using EvenQ_API.Model;
+using EvenQ_API.Repo;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -31,9 +32,16 @@ namespace EvenQ_API
             services.AddDbContext<AppDbContext>(options =>
                             options.UseSqlServer(Configuration.GetConnectionString("DBConnection")));
 
-           // services.AddScoped<IDepartmentRepository, DepartmentRepository>();
-           // services.AddScoped<IEmployeeRepository, EmployeeRepository>(); services.AddControllers();
+            services.AddScoped<ILocation, LocationRepo>();
+            services.AddScoped<IRefferals, RefferalsRepo>();
+            services.AddScoped<ITickets, TicketRepo>();
+            services.AddScoped<IMemberRepo, MemberRepo>();
+            services.AddScoped<IEvents, EventRepo>();
+            services.AddControllers();
+
         }
+
+
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
