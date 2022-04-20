@@ -19,11 +19,6 @@ namespace EvenQ_API.Repo
 
         public async Task<Member> AddMember(Member member)
         {
-            if (member.UID != null )
-            {
-                appDbContext.Entry(member.UID).State = EntityState.Unchanged;
-            }
-
             var result = await appDbContext.Members.AddAsync(member);
             await appDbContext.SaveChangesAsync();
             return result.Entity;
