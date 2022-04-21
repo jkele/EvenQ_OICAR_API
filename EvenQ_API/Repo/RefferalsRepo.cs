@@ -30,9 +30,17 @@ namespace EvenQ_API.Repo
                 appDbContext.Entry(refferals.Inviter).State = EntityState.Unchanged;
             }
 
+            if (appDbContext.Refferals.Where(r => r.Inviter.UID == refferals.InviterId).Count() > appDbContext.Members.First(m => m.UID == refferals.InviterId).NumberOfRefferals)
+            {
+                return null;
+
+
+            }
+
+
             var result = await appDbContext.Refferals.AddAsync(refferals);
             await appDbContext.SaveChangesAsync();
-  
+
             return result.Entity;
         }
 

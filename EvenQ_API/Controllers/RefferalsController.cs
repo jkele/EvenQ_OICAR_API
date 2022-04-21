@@ -51,6 +51,8 @@ namespace EvenQ_API.Controllers
             {
                 if (Refferals == null)
                     return BadRequest();
+               
+
                 var createdRefferal = await refferalsRepo.AddRefferal(Refferals);
 
                 return CreatedAtAction(nameof(CreateRefferal),
