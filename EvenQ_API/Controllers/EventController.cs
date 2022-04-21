@@ -57,6 +57,21 @@ namespace EvenQ_API.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("UpcomingEvents")]
+        public async Task<ActionResult> GetNewEvents()
+        {
+            try
+            {
+                return Ok(await evenRepo.GetUpcomingEvents());
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                    "Error retrieving data from the database");
+            }
+        }
+
         [HttpGet("{eventID:int}")]
         public async Task<ActionResult<Event>> GetEvent(int eventID)
         {

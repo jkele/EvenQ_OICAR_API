@@ -9,7 +9,7 @@ namespace EvenQ_API.Repo
     public interface IRefferals
     {
         Task<Refferals> GetRefferal(int refferalID);
-        Task<Refferals> AddRefferal(Refferals Refferals, Member member);
+        Task<Refferals> AddRefferal(Refferals Refferals);
         Task<Refferals> UpdateRefferal(Refferals Refferals);
     }
 }

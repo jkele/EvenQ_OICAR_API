@@ -17,7 +17,7 @@ namespace EvenQ_API.Repo
             this.appDbContext = appDbContext;
         }
 
-        public async Task<Refferals> AddRefferal(Refferals refferals, Member member)
+        public async Task<Refferals> AddRefferal(Refferals refferals)
         {
 
             if (refferals.Invitee != null)
@@ -31,8 +31,7 @@ namespace EvenQ_API.Repo
             }
 
             var result = await appDbContext.Refferals.AddAsync(refferals);
-            if (Int32.Parse(refferals.InviterId) <= member.NumberOfRefferals && Int32.Parse(refferals.InviteeId) <= member.NumberOfRefferals)
-                await appDbContext.SaveChangesAsync();
+            await appDbContext.SaveChangesAsync();
   
             return result.Entity;
         }

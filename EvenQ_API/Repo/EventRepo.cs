@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Globalization;
 
 namespace EvenQ_API.Repo
 {
@@ -49,6 +50,13 @@ namespace EvenQ_API.Repo
         {
             return await appDbContext.Events.ToListAsync();
         }
+
+        public async Task<IEnumerable<Event>> GetUpcomingEvents()
+        {
+            await appDbContext.SaveChangesAsync();
+            return await appDbContext.Events.Where(e => e.Date > DateTime.UtcNow).ToListAsync();
+        }
+
 
         public async Task<IEnumerable<Event>> SearchEventTitle(string name)
         {

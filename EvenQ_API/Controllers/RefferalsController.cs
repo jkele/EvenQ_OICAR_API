@@ -16,7 +16,6 @@ namespace EvenQ_API.Controllers
     public class RefferalsController : ControllerBase
     {
         private readonly IRefferals refferalsRepo;
-        private readonly IMemberRepo memeberRepo;
 
         public RefferalsController(IRefferals refferalsRepo)
         {
@@ -46,15 +45,13 @@ namespace EvenQ_API.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Refferals>> CreateRefferal(Refferals Refferals, string UID)
+        public async Task<ActionResult<Refferals>> CreateRefferal(Refferals Refferals)
         {
             try
             {
                 if (Refferals == null)
                     return BadRequest();
-
-                var result = await memeberRepo.GetMember(UID);
-                var createdRefferal = await refferalsRepo.AddRefferal(Refferals, result);
+                var createdRefferal = await refferalsRepo.AddRefferal(Refferals);
 
                 return CreatedAtAction(nameof(CreateRefferal),
                     new { id = createdRefferal.IDRefferal }, createdRefferal);
