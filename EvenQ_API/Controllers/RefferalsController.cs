@@ -6,76 +6,23 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using EvenQ_API.Model;
 using EvenQ_API.Repo;
+using EvenQ_API.Attributes;
 
 namespace EvenQ_API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [ApiKey]
     public class RefferalsController : ControllerBase
     {
         private readonly IRefferals refferalsRepo;
+        private readonly IMemberRepo memeberRepo;
 
         public RefferalsController(IRefferals refferalsRepo)
         {
             this.refferalsRepo = refferalsRepo;
         }
 
-        [HttpGet("{searchInvitee}")]
-        public async Task<ActionResult<IEnumerable<Refferals>>> SearchInvitee(string invitee)
-        {
-            try
-            {
-                var result = await refferalsRepo.SearchInvitee(invitee);
-
-                if (result.Any())
-                {
-                    return Ok(result);
-                }
-
-                return NotFound();
-            }
-            catch (Exception)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError,
-                "Error retrieving data from the database");
-            }
-        }
-
-        [HttpGet("{searchInviter}")]
-        public async Task<ActionResult<IEnumerable<Refferals>>> SearchInviter(string inviter)
-        {
-            try
-            {
-                var result = await refferalsRepo.SearchInviter(inviter);
-
-                if (result.Any())
-                {
-                    return Ok(result);
-                }
-
-                return NotFound();
-            }
-            catch (Exception)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError,
-                "Error retrieving data from the database");
-            }
-        }
-
-
-        [HttpGet]
-        public async Task<ActionResult> GetRefferals()
-        {
-            try
-            {
-                return Ok(await refferalsRepo.GetRefferals());
-            }
-            catch (Exception)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError,
-                    "Error retrieving data from the database");
-            }
-        }
 
         [HttpGet("{refferalID:int}")]
         public async Task<ActionResult<Refferals>> GetRefferal(int refferalID)
@@ -99,14 +46,15 @@ namespace EvenQ_API.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Refferals>> CreateRefferal(Refferals Refferals)
+        public async Task<ActionResult<Refferals>> CreateRefferal(Refferals Refferals, string UID)
         {
             try
             {
                 if (Refferals == null)
                     return BadRequest();
 
-                var createdRefferal = await refferalsRepo.AddRefferal(Refferals);
+                var result = await memeberRepo.GetMember(UID);
+                var createdRefferal = await refferalsRepo.AddRefferal(Refferals, result);
 
                 return CreatedAtAction(nameof(CreateRefferal),
                     new { id = createdRefferal.IDRefferal }, createdRefferal);
@@ -142,27 +90,5 @@ namespace EvenQ_API.Controllers
             }
         }
 
-        [HttpDelete("{refferalID:int}")]
-        public async Task<ActionResult> DeleteRefferal(int refferalID)
-        {
-            try
-            {
-                var refferalToDelete = await refferalsRepo.GetRefferal(refferalID);
-
-                if (refferalToDelete == null)
-                {
-                    return NotFound($"Refferals with UID = {refferalID} not found");
-                }
-
-                await refferalsRepo.DeleteRefferal(refferalID);
-
-                return Ok($"Refferals with UID = {refferalID} deleted");
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError,
-                    "Error deleting employee record");
-            }
-        }
     }
 }

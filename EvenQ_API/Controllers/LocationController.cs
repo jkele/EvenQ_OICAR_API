@@ -6,11 +6,13 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using EvenQ_API.Model;
 using EvenQ_API.Repo;
+using EvenQ_API.Attributes;
 
 namespace EvenQ_API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [ApiKey]
     public class LocationController : ControllerBase
     {
         private readonly ILocation locationRepo;

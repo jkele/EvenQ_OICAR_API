@@ -8,12 +8,8 @@ namespace EvenQ_API.Repo
 {
     public interface IRefferals
     {
-        Task<IEnumerable<Refferals>> SearchInvitee(string invitee);
-        Task<IEnumerable<Refferals>> SearchInviter(string inviter);
-        Task<IEnumerable<Refferals>> GetRefferals();
         Task<Refferals> GetRefferal(int refferalID);
-        Task<Refferals> AddRefferal(Refferals Refferals);
+        Task<Refferals> AddRefferal(Refferals Refferals, Member member);
         Task<Refferals> UpdateRefferal(Refferals Refferals);
-        Task DeleteRefferal(int refferalID);
     }
 }

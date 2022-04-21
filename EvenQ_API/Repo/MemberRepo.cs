@@ -40,6 +40,7 @@ namespace EvenQ_API.Repo
             return await appDbContext.Members.FirstOrDefaultAsync(m => m.UID == UID);
         }
 
+
         public async Task<IEnumerable<Member>> GetMembers()
         {
             return await appDbContext.Members.ToListAsync();
@@ -56,6 +57,7 @@ namespace EvenQ_API.Repo
             return await query.ToListAsync();
 
         }
+
 
         public async Task<Member> UpdateMember(Member member)
         {

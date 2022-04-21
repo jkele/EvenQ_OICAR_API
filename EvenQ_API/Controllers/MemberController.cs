@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using EvenQ_API.Attributes;
 using EvenQ_API.Model;
 using EvenQ_API.Repo;
 using Microsoft.AspNetCore.Http;
@@ -11,6 +12,7 @@ namespace EvenQ_API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [ApiKey]
     public class MemberController : ControllerBase
     {
         private readonly IMemberRepo memberRepo;
@@ -20,7 +22,7 @@ namespace EvenQ_API.Controllers
             this.memberRepo = memberRepo;
         }
 
-       [HttpGet("{searchMember}")]
+       [HttpGet("{name}")]
         public async Task<ActionResult<IEnumerable<Member>>> SearchMember(string name)
         {
             try

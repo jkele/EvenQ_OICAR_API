@@ -17,8 +17,9 @@ namespace EvenQ_API.Repo
             this.appDbContext = appDbContext;
         }
 
-        public async Task<Refferals> AddRefferal(Refferals refferals)
+        public async Task<Refferals> AddRefferal(Refferals refferals, Member member)
         {
+
             if (refferals.Invitee != null)
             {
                 appDbContext.Entry(refferals.Invitee).State = EntityState.Unchanged;
@@ -30,20 +31,12 @@ namespace EvenQ_API.Repo
             }
 
             var result = await appDbContext.Refferals.AddAsync(refferals);
-            await appDbContext.SaveChangesAsync();
+            if (Int32.Parse(refferals.InviterId) <= member.NumberOfRefferals && Int32.Parse(refferals.InviteeId) <= member.NumberOfRefferals)
+                await appDbContext.SaveChangesAsync();
+  
             return result.Entity;
         }
 
-        public async Task DeleteRefferal(int refferalID)
-        {
-            var results = await appDbContext.Refferals.FirstOrDefaultAsync(r => r.IDRefferal == refferalID);
-
-            if (results != null)
-            {
-                appDbContext.Refferals.Remove(results);
-                await appDbContext.SaveChangesAsync();
-            }
-        }
 
         public async Task<Refferals> GetRefferal(int refferalID)
         {
@@ -55,27 +48,6 @@ namespace EvenQ_API.Repo
             return await appDbContext.Refferals.ToListAsync();
         }
 
-        public async Task<IEnumerable<Refferals>> SearchInvitee(string invitee)
-        {
-            IQueryable<Refferals> query = appDbContext.Refferals;
-            if (!string.IsNullOrEmpty(invitee))
-            {
-                query = query.Where(r => r.InviteeId.Contains(invitee));
-            }
-
-            return await query.ToListAsync();
-        }
-
-        public async Task<IEnumerable<Refferals>> SearchInviter(string inviter)
-        {
-            IQueryable<Refferals> query = appDbContext.Refferals;
-            if (!string.IsNullOrEmpty(inviter))
-            {
-                query = query.Where(r => r.InviteeId.Contains(inviter));
-            }
-
-            return await query.ToListAsync();
-        }
 
         public async Task<Refferals> UpdateRefferal(Refferals refferals)
         {
