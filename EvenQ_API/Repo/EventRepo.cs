@@ -53,8 +53,8 @@ namespace EvenQ_API.Repo
 
         public async Task<IEnumerable<Event>> GetUpcomingEvents()
         {
-            await appDbContext.SaveChangesAsync();
-            return await appDbContext.Events.Where(e => e.Date > DateTime.UtcNow).ToListAsync();
+         
+         return await appDbContext.Events.Where(e => e.Date > DateTime.UtcNow).ToListAsync();
         }
 
 

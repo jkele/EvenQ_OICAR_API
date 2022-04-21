@@ -24,7 +24,7 @@ namespace EvenQ_API.Controllers
 
 
         [HttpGet("{refferalID:int}")]
-        public async Task<ActionResult<Refferals>> GetRefferal(int refferalID)
+        public async Task<ActionResult<Refferal>> GetRefferal(int refferalID)
         {
             try
             {
@@ -45,7 +45,7 @@ namespace EvenQ_API.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Refferals>> CreateRefferal(Refferals Refferals)
+        public async Task<ActionResult<Refferal>> CreateRefferal(Refferal Refferals)
         {
             try
             {
@@ -64,7 +64,7 @@ namespace EvenQ_API.Controllers
         }
 
         [HttpPut("{refferalID:int}")]
-        public async Task<ActionResult<Refferals>> UpdateRefferal(int refferalID, Refferals Refferals)
+        public async Task<ActionResult<Refferal>> UpdateRefferal(int refferalID, Refferal Refferals)
         {
             try
             {

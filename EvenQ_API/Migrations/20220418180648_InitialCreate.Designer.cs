@@ -124,7 +124,7 @@ namespace EvenQ_API.Migrations
                     b.Property<string>("InviterUID")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<DateTime>("date")
+                    b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
                     b.HasKey("IDRefferal");

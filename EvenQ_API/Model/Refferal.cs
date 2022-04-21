@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace EvenQ_API.Model
 {
-    public class Refferals
+    public class Refferal
     {
 
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -20,6 +20,6 @@ namespace EvenQ_API.Model
         public Member Invitee { get; set; }
 
         public string InviteeId { get; set; }
-        public DateTime date { get; set; }
+        public DateTime Date { get; set; }
     }
 }

@@ -17,7 +17,7 @@ namespace EvenQ_API.Repo
             this.appDbContext = appDbContext;
         }
 
-        public async Task<Refferals> AddRefferal(Refferals refferals)
+        public async Task<Refferal> AddRefferal(Refferal refferals)
         {
 
             if (refferals.Invitee != null)
@@ -37,18 +37,18 @@ namespace EvenQ_API.Repo
         }
 
 
-        public async Task<Refferals> GetRefferal(int refferalID)
+        public async Task<Refferal> GetRefferal(int refferalID)
         {
             return await appDbContext.Refferals.Include(r => r.Inviter).Include(re => re.Invitee).FirstOrDefaultAsync(refe => refe.IDRefferal == refferalID);
         }
 
-        public async Task<IEnumerable<Refferals>> GetRefferals()
+        public async Task<IEnumerable<Refferal>> GetRefferals()
         {
             return await appDbContext.Refferals.ToListAsync();
         }
 
 
-        public async Task<Refferals> UpdateRefferal(Refferals refferals)
+        public async Task<Refferal> UpdateRefferal(Refferal refferals)
         {
             var results = await appDbContext.Refferals.FirstOrDefaultAsync(r => r.IDRefferal == refferals.IDRefferal);
 
@@ -65,7 +65,7 @@ namespace EvenQ_API.Repo
                     results.InviteeId = refferals.Invitee.UID;
                 }
                 results.InviteeId = refferals.InviteeId;
-                results.date = refferals.date;
+                results.Date = refferals.Date;
 
                 await appDbContext.SaveChangesAsync();
 

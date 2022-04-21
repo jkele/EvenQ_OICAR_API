@@ -18,7 +18,7 @@ namespace EvenQ_API.Model
         public DbSet<Member> Members { get; set; }
         public DbSet<Event> Events { get; set; }
         public DbSet<Location> Locations { get; set; }
-        public DbSet<Refferals> Refferals { get; set; }
+        public DbSet<Refferal> Refferals { get; set; }
         public DbSet<Ticket> Tickets { get; set; }
     }
 }
