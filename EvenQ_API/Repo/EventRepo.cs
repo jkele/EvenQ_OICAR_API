@@ -18,6 +18,8 @@ namespace EvenQ_API.Repo
             this.appDbContext = appDbContext;
         }
 
+
+
         public async Task<Event> AddEvent(Event events)
         {
             if (events.Location != null)
@@ -48,7 +50,7 @@ namespace EvenQ_API.Repo
 
         public async Task<IEnumerable<Event>> GetEvents()
         {
-            return await appDbContext.Events.ToListAsync();
+            return await appDbContext.Events.Include(e => e.Location).ToListAsync();
         }
 
         public async Task<IEnumerable<Event>> GetUpcomingEvents()

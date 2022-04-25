@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace EvenQ_API.Model
@@ -21,7 +22,11 @@ namespace EvenQ_API.Model
         public DateTime Date { get; set; }
 
         public Location Location { get; set; }
+
+        [JsonIgnore]
         public int LocationId { get; set; }
         public float TicketPrice { get; set; }
+
+
     }
 }
