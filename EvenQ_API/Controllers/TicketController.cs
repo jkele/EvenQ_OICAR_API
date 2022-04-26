@@ -53,27 +53,6 @@ namespace EvenQ_API.Controllers
             }
         }
 
-        [HttpGet("{ticketID:int}")]
-        public async Task<ActionResult<Ticket>> GetTicket(int ticketID)
-        {
-            try
-            {
-                var result = await ticketRepo.GetTicket(ticketID);
-
-                if (result == null)
-                {
-                    return NotFound();
-                }
-
-                return result;
-            }
-            catch (Exception)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError,
-                    "Error retrieving data from the database");
-            }
-        }
-
         [HttpPost]
         public async Task<ActionResult<Ticket>> CreateTicket(Ticket Ticket)
         {
