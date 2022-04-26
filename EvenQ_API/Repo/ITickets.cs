@@ -10,6 +10,7 @@ namespace EvenQ_API.Repo
     {
         Task<IEnumerable<Ticket>> GetTickets();
         Task<Ticket> GetTicket(int ticketID);
+        Task<IEnumerable<Ticket>> GetTicketByUID(string UID);
         Task<Ticket> AddTicket(Ticket Ticket);
         Task<Ticket> UpdateTicket(Ticket Ticket);
         Task DeleteTicket(int ticketID);

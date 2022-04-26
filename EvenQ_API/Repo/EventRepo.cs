@@ -56,7 +56,7 @@ namespace EvenQ_API.Repo
         public async Task<IEnumerable<Event>> GetUpcomingEvents()
         {
          
-         return await appDbContext.Events.Where(e => e.Date > DateTime.UtcNow).ToListAsync();
+         return await appDbContext.Events.Where(e => e.Date > DateTime.UtcNow).Include(e => e.Location).ToListAsync();
         }
 
 

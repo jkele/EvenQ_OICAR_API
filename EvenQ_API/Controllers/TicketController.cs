@@ -38,6 +38,21 @@ namespace EvenQ_API.Controllers
             }
         }
 
+
+        [HttpGet("{UID}")]
+        public async Task<ActionResult> GetTicketbyUID(string UID)
+        {
+            try
+            {
+                return Ok(await ticketRepo.GetTicketByUID(UID));
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                    "Error retrieving data from the database");
+            }
+        }
+
         [HttpGet("{ticketID:int}")]
         public async Task<ActionResult<Ticket>> GetTicket(int ticketID)
         {

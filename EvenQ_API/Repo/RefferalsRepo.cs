@@ -52,7 +52,7 @@ namespace EvenQ_API.Repo
 
         public async Task<IEnumerable<Refferal>> GetRefferals()
         {
-            return await appDbContext.Refferals.ToListAsync();
+            return await appDbContext.Refferals.Include(r => r.Inviter).Include(re => re.Invitee).ToListAsync();
         }
 
 
