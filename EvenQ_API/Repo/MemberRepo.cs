@@ -46,6 +46,12 @@ namespace EvenQ_API.Repo
             return await appDbContext.Members.ToListAsync();
         }
 
+        public async Task<Member> IsAdmin(string UID)
+        {
+            return await appDbContext.Members.Where(m => m.IsAdmin == true).FirstOrDefaultAsync(m => m.UID == UID);
+        }
+
+
         public async Task<IEnumerable<Member>> SearchMember(string name)
         {
             IQueryable<Member> query = appDbContext.Members;

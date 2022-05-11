@@ -22,7 +22,7 @@ namespace EvenQ_API.Controllers
             this.memberRepo = memberRepo;
         }
 
-       [HttpGet("{name}")]
+       [HttpGet("MemberName/{name}")]
         public async Task<ActionResult<IEnumerable<Member>>> SearchMember(string name)
         {
             try
@@ -58,7 +58,28 @@ namespace EvenQ_API.Controllers
             }
         }
 
-        [HttpGet("{UID:int}")]
+        [HttpGet("Admin/{UID}")]
+        public async Task<ActionResult<Member>> IsMemberAdmin(string UID)
+        {
+            try
+            {
+                var result = await memberRepo.IsAdmin(UID);
+
+                if (result == null)
+                {
+                    return NotFound("Data doesn't exist or member is not an admin.");
+                }
+
+                return result;
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                    "Error retrieving data from the database");
+            }
+        }
+
+        [HttpGet("{UID}")]
         public async Task<ActionResult<Member>> GetMember(string UID)
         {
             try

@@ -11,6 +11,8 @@ namespace EvenQ_API.Repo
         Task<IEnumerable<Member>> SearchMember(string name);
         Task<IEnumerable<Member>> GetMembers();
         Task<Member> GetMember(string UID);
+
+        Task<Member> IsAdmin(string UID);
         Task<Member> AddMember(Member Member);
         Task<Member> UpdateMember(Member Member);
         Task DeleteMember(string UID);

@@ -21,7 +21,7 @@ namespace EvenQ_API.Controllers
             this.evenRepo = evenRepo;
         }
 
-        [HttpGet("{searchEventTitle}")]
+        [HttpGet("{name}")]
         public async Task<ActionResult<IEnumerable<Event>>> SearchEventTitle(string name)
         {
             try
