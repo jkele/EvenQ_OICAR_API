@@ -88,5 +88,22 @@ namespace EvenQ_API.Repo
 
             return null;
         }
+
+        public async Task<Member> UpdateMemberAdmin(Member member)
+        {
+            var results = await appDbContext.Members.FirstOrDefaultAsync(m => m.UID == member.UID);
+
+            if (results != null)
+            {
+                results.FirstName = member.FirstName;
+                results.LastName = member.LastName;
+
+                await appDbContext.SaveChangesAsync();
+
+                return results;
+            }
+
+            return null;
+        }
     }
 }

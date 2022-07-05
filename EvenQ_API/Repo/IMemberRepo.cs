@@ -15,6 +15,8 @@ namespace EvenQ_API.Repo
         Task<Member> IsAdmin(string UID);
         Task<Member> AddMember(Member Member);
         Task<Member> UpdateMember(Member Member);
+
+        Task<Member> UpdateMemberAdmin(Member Member);
         Task DeleteMember(string UID);
     }
 }

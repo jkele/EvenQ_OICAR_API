@@ -144,6 +144,30 @@ namespace EvenQ_API.Controllers
             }
         }
 
+        [HttpPut("Admin/{UID}")]
+        public async Task<ActionResult<Member>> UpdateMemberAdmin(string UID, Member member)
+        {
+            try
+            {
+                if (UID != member.UID)
+                    return BadRequest("Member ID mismatch");
+
+                var memberToUpdate = await memberRepo.GetMember(UID);
+
+                if (memberToUpdate == null)
+                {
+                    return NotFound($"Member with UID = {UID} not found");
+                }
+
+                return await memberRepo.UpdateMemberAdmin(member);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                    "Error updating member record");
+            }
+        }
+
         [HttpDelete("{UID}")]
         public async Task<ActionResult> DeleteMember(string UID)
         {
