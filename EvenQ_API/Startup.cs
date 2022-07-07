@@ -35,6 +35,7 @@ namespace EvenQ_API
             services.AddScoped<ILocation, LocationRepo>();
             services.AddScoped<IRefferals, RefferalsRepo>();
             services.AddScoped<ITickets, TicketRepo>();
+            services.AddScoped<IPayment, PaymentRepo>();
             services.AddScoped<IMemberRepo, MemberRepo>();
             services.AddScoped<IEvents, EventRepo>();
             services.AddControllers();

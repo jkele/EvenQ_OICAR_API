@@ -17,6 +17,7 @@ namespace EvenQ_API.Repo
         Task<Member> UpdateMember(Member Member);
 
         Task<Member> UpdateMemberAdmin(Member Member);
+        public Task<bool> IsInviteValid(string RefferalCode);
         Task DeleteMember(string UID);
     }
 }

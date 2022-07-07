@@ -12,7 +12,7 @@ namespace EvenQ_API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [ApiKey]
+
     public class MemberController : ControllerBase
     {
         private readonly IMemberRepo memberRepo;
@@ -191,6 +191,24 @@ namespace EvenQ_API.Controllers
             }
         }
 
+
+
+        [HttpGet("Check/{ReffralCode}")]
+        public async Task<bool> IsInviteValid(string ReffralCode)
+        {
+            try
+            {
+                var result = await memberRepo.IsInviteValid(ReffralCode);
+               
+                return result;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+                
+            
+        }
 
 
     }

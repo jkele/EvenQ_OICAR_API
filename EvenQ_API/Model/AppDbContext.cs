@@ -15,6 +15,7 @@ namespace EvenQ_API.Model
 
         }
 
+        public DbSet<Payment> Payments { get; set; }
         public DbSet<Member> Members { get; set; }
         public DbSet<Event> Events { get; set; }
         public DbSet<Location> Locations { get; set; }

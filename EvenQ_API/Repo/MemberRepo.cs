@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
+using Firebase.Auth;
+using FirebaseAdmin.Auth;
 
 namespace EvenQ_API.Repo
 {
@@ -17,6 +19,39 @@ namespace EvenQ_API.Repo
             this.appDbContext = appDbContext;
         }
 
+        private static Random random = new Random();
+
+        public FirebaseAuthProvider auth;
+
+        AbstractFirebaseAuth afa;
+
+
+        public MemberRepo()
+        {
+            auth = new FirebaseAuthProvider(new FirebaseConfig("AIzaSyB6-iD9rlVsAQfOZKsmDBVPBlpEFpGrBa0"));
+        }
+        public async Task DeleteMember(string UID)
+        {
+            var results = await appDbContext.Members.FirstOrDefaultAsync(m => m.UID == UID);
+
+            if (results != null)
+            {
+                string randomized = RandomString(10);
+                results.FirstName = randomized;
+                results.LastName = randomized;
+
+                await afa.DeleteUserAsync(UID);
+                await UpdateMember(results);
+                await appDbContext.SaveChangesAsync();
+            }
+        }
+        public static string RandomString(int length)
+        {
+            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            return new string(Enumerable.Repeat(chars, length)
+                .Select(s => s[random.Next(s.Length)]).ToArray());
+        }
+
         public async Task<Member> AddMember(Member member)
         {
             var result = await appDbContext.Members.AddAsync(member);
@@ -24,16 +59,6 @@ namespace EvenQ_API.Repo
             return result.Entity;
         }
 
-        public async Task DeleteMember(string UID)
-        {
-            var results = await appDbContext.Members.FirstOrDefaultAsync(m => m.UID == UID);
-
-            if (results != null)
-            {
-                appDbContext.Members.Remove(results);
-                await appDbContext.SaveChangesAsync();
-            }
-        }
 
         public async Task<Member> GetMember(string UID)
         {
@@ -45,6 +70,25 @@ namespace EvenQ_API.Repo
         {
             return await appDbContext.Members.ToListAsync();
         }
+
+        public async Task<bool> IsInviteValid(string RefferalCode)
+        {
+            var results = appDbContext.Members.Where(r => r.RefferalCode == RefferalCode);
+
+            if (results != null)
+            {
+                if (results.First().NumberOfRefferals > 0)
+                {
+                    var sub = results.First();
+                    sub.NumberOfRefferals = sub.NumberOfRefferals - 1;
+                    await appDbContext.SaveChangesAsync();
+                    return true;
+                }
+            }
+            return false;
+        }
+
+
 
         public async Task<Member> IsAdmin(string UID)
         {

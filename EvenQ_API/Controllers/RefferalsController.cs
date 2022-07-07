@@ -12,7 +12,7 @@ namespace EvenQ_API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [ApiKey]
+ 
 
     public class RefferalsController : ControllerBase
     {

@@ -1,4 +1,4 @@
-﻿using System;
+﻿    using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -12,7 +12,7 @@ namespace EvenQ_API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [ApiKey]
+
     public class EventController : ControllerBase
     {
         private readonly IEvents evenRepo;
